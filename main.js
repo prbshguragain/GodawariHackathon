@@ -22,15 +22,29 @@ var firebaseConfig = {
   function submitForm(e){
     e.preventDefault();
 
+    var gen;
+    document.getElementsByName("gender").forEach(function(elm){
+      if (elm.checked) {
+        gen = elm.value;
+      }
+    })
+
+    var inte;
+    document.getElementsByName("Interest").forEach(function(elm){
+      if (elm.checked) {
+        inte = elm.value;
+      }
+    })
+
     // get values :) //
-    var fname = getInputVal('fname');
-    var lname = getInputVal('lname');
     var email = getInputVal('email');
+    var lname = getInputVal('lname');
+    
     var phone = getInputVal('phone');
     var faculty = getInputVal('faculty');
     var year = getInputVal('year');
-    var gen = getInputVal('gen');
-    var inte = getInputVal('inte');
+    
+    var fname = getInputVal('fname');
 
   //save msg in firebass//
     saveMessage(fname, lname, email, phone, faculty, year, gen, inte);
@@ -49,13 +63,14 @@ var firebaseConfig = {
   function saveMessage(fname, lname, email, phone, faculty, year, gen, inte){
     var newMessageRef = messageRef.push();
     newMessageRef.set({
-      fname: fname,
-      lname: lname,
+     	
+     	faculty: faculty,
       email: email,
       phone: phone,
-      faculty: faculty,
+      lname: lname,
       year: year,
       gender: gen,
-      Interest: inte
+      Interest: inte,
+      fname: fname
     });
   }
